@@ -1,0 +1,33 @@
+---
+
+- name: start mariadb
+  become: true
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: secure mariadb installation
+  become: true
+  expect:
+    command: mysql_secure_installation
+    responses:
+      'Enter current password for root \(enter for none\):' : "\n"
+      'Set root password\? \[Y/n\]' : 'n'
+      'Remove anonymous users\? \[Y/n\]' : 'Y'
+      'Disallow root login remotely\? \[Y/n\]' : 'Y'
+      'Remove test database and access to it\? \[Y/n\]' : 'Y'
+      'Reload privilege tables now\? \[Y/n\]' : 'Y'
+
+- name: create database
+  become: true
+  mysql_db:
+    name: wikidatabase
+    state: present
+
+- name: create user in MYSQL
+  become: true
+  mysql_user:
+    name: wiki
+    password: wikipassword
+    priv: '*.*:ALL,GRANT'

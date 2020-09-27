@@ -1,0 +1,22 @@
+---
+
+- name: download mediawiki tarball
+  become: true
+  unarchive:
+    src: https://releases.wikimedia.org/mediawiki/1.35/mediawiki-1.35.0.tar.gz
+    dest: /var/www/html
+    remote_src: yes
+
+- name: rename mediawiki-1.35.0
+  become: true
+  command: mv /var/www/html/mediawiki-1.35.0 /var/www/html/mediawiki
+
+- name: change ownership and permissions
+  become: true
+  file:
+    path: /var/www/html/
+    owner: apache
+    group: apache
+    mode: '0755'
+    state: directory
+    recurse: yes

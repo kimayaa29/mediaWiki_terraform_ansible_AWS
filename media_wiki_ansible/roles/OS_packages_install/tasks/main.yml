@@ -1,0 +1,43 @@
+---
+
+- name: this installs all the OS required packages
+  become: true
+  dnf:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - httpd
+      - php
+      - php-mysqlnd
+      - php-gd
+      - php-xml
+      - mariadb-server
+      - mariadb
+      - php-mbstring
+      - php-json
+      - wget
+      - firewalld
+    state: latest
+
+- name: reset php version from 7.2
+  become: true
+  command: dnf module reset php -y
+
+- name: enable 7.3 module
+  become: true
+  command: dnf module enable php:7.3 -y
+
+- name: install php module
+  become: true
+  dnf:
+    name: php
+    state: latest
+
+- name: install pexpect module
+  become: true
+  pip:
+    name: "{{ pip_packages }}"
+  vars:
+    pip_packages:
+      - pexpect
+      - PyMySQL

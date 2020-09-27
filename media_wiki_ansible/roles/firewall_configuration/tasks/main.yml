@@ -1,0 +1,17 @@
+---
+
+- name: start firewalld service
+  become: true
+  service:
+    name: firewalld
+    state: started
+
+- name: add HTTP service
+  become: true
+  command: firewall-cmd --permanent --zone=public --add-service=http
+  notify: service restart
+
+- name: selinux configuration
+  become: true
+  command: restorecon -FR /var/www/html/mediawiki
+

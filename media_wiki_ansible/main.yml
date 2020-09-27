@@ -1,0 +1,11 @@
+---
+- name: "OS Prerequisites"
+  gather_facts: no
+  hosts: localhost
+  roles:
+    - OS_packages_install
+    - database_configuration
+    - mediawiki_installation
+    - firewall_configuration
+  handlers:
+    - include: roles/firewall_configuration/handlers/main.yml
