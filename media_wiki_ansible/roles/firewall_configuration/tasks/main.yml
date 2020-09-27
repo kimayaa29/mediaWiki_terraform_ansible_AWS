@@ -14,7 +14,11 @@
 
 - name: add HTTP service
   become: true
-  shell: firewall-cmd --permanent --zone=public --add-service=http
+  firewalld:
+    service: http
+    permanent: true
+    zone: public
+    state: enabled
 
 - name: restart firewalld
   become: true
@@ -24,7 +28,11 @@
 
 - name: add HTTPS service
   become: true
-  shell: firewall-cmd --permanent --zone=public --add-service=https
+  firewalld:
+    service: https
+    permanent: true
+    zone: public
+    state: enabled
 
 - name: selinux configuration
   become: true
