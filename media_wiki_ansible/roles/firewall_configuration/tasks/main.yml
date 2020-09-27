@@ -6,6 +6,12 @@
     name: firewalld
     state: started
 
+- name: start httpd service
+  become: true
+  service:
+    name: httpd
+    state: started
+
 - name: add HTTP service
   become: true
   command: firewall-cmd --permanent --zone=public --add-service=http
