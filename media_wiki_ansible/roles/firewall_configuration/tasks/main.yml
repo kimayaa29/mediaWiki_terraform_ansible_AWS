@@ -14,7 +14,7 @@
 
 - name: add HTTP service
   become: true
-  command: firewall-cmd --permanent --zone=public --add-service=http
+  shell: firewall-cmd --permanent --zone=public --add-service=http
 
 - name: restart firewalld
   become: true
@@ -24,10 +24,10 @@
 
 - name: add HTTPS service
   become: true
-  command: firewall-cmd --permanent --zone=public --add-service=https
+  shell: firewall-cmd --permanent --zone=public --add-service=https
 
 - name: selinux configuration
   become: true
-  command: restorecon -FR /var/www/html/mediawiki
+  shell: restorecon -FR /var/www/html/mediawiki
   notify: service restart
 
