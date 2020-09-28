@@ -20,11 +20,9 @@
     zone: public
     state: enabled
 
-- name: restart firewalld
+- name: add http service
   become: true
-  service:
-    name: firewalld
-    state: restarted
+  command: sh /tmp/mediaWiki_terraform_ansible_AWS/media_wiki_ansible/firewalld.sh
 
 - name: add HTTPS service
   become: true
@@ -37,5 +35,9 @@
 - name: selinux configuration
   become: true
   shell: restorecon -FR /var/www/html/mediawiki
-  notify: service restart
 
+- name: restart firewalld
+  become: true
+  service:
+    name: firewalld
+    state: restarted
