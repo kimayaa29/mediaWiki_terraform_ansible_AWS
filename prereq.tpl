@@ -6,4 +6,4 @@ sudo dnf install git -y;
 sleep 100
 git clone https://github.com/kimayaa29/mediaWiki_terraform_ansible_AWS.git /tmp/mediaWiki_terraform_ansible_AWS;
 sleep 100
-/usr/bin/ansible-playbook /tmp/mediaWiki_terraform_ansible_AWS/media_wiki_ansible/main.yml;
+/usr/bin/ansible-playbook /tmp/mediaWiki_terraform_ansible_AWS/media_wiki_ansible/main.yml -vvv > /tmp/ansible.log
