@@ -16,6 +16,7 @@
       - php-mbstring
       - php-json
       - wget
+      - unzip
       - firewalld
     state: latest
 
