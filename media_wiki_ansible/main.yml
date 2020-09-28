@@ -7,5 +7,4 @@
     - database_configuration
     - mediawiki_installation
     - firewall_configuration
-  handlers:
-    - include: roles/firewall_configuration/handlers/main.yml
+
