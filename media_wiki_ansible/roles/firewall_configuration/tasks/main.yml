@@ -13,28 +13,19 @@
     state: started
 
 - name: add HTTP service
-  become: true
   firewalld:
-    service: http
-    permanent: true
+    service: "{{ item }}"
+    permanent: yes
     zone: public
     state: enabled
-
-- name: add http service
-  become: true
-  command: sh /tmp/mediaWiki_terraform_ansible_AWS/media_wiki_ansible/firewalld.sh
-
-- name: add HTTPS service
-  become: true
-  firewalld:
-    service: https
-    permanent: true
-    zone: public
-    state: enabled
+  loop:
+    - http
+    - https
 
 - name: selinux configuration
   become: true
   shell: restorecon -FR /var/www/html/mediawiki
+  notify: service restart
 
 - name: restart firewalld
   become: true
