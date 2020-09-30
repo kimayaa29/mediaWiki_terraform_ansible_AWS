@@ -1,10 +1,5 @@
 #!/bin/bash
 sudo dnf install python3 -y;
-sudo dnf install firewalld -y
-sudo systemctl start firewalld
-sudo firewall-cmd --zone=public --permanent --add-service=http
-sudo firewall-cmd --zone=public --permanent --add-service=https
-sudo firewall-cmd --reload
 sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y;
 sudo dnf install ansible -y;
 sudo dnf install git -y;
