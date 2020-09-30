@@ -7,18 +7,17 @@ variable "instance-type"{
 }
 
 variable "vpc-cidr" {
-    default = "10.0.0.0/16"
+    default = "10.1.0.0/16"
 }
 
-variable "sub-a-cidr" {
+variable "subnet-cidr" {
     default = "10.0.0.0/24"
 }
 
-variable "sub-b-cidr" {
-    default = "10.0.1.0/24"
+variable "availability_zone" {
+    default = "ap-south-1a"
 }
 
 variable "key_name" {
     default = "AWS_access"
-
 }
