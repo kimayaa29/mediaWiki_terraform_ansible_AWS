@@ -13,19 +13,14 @@
     state: started
 
 - name: add HTTP service
-  firewalld:
-    service: "{{ item }}"
-    permanent: yes
-    zone: public
-    state: enabled
-  loop:
-    - http
-    - https
+  shell: |
+     firewall-cmd --zone=public --permanent --add-service=http
+     firewall-cmd --zone=public --permanent --add-service=https
+     firewall-cmd --reload
 
 - name: selinux configuration
   become: true
   shell: restorecon -FR /var/www/html/mediawiki
-  notify: service restart
 
 - name: restart firewalld
   become: true
