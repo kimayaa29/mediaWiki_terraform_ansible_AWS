@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo dnf install python3 -y;
-sudo dnf install firewalld
+sudo dnf install firewalld -y
+sudo systemctl start firewalld
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --reload
