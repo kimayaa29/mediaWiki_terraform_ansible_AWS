@@ -2,9 +2,6 @@ resource "aws_vpc" "mw_vpc" {
   cidr_block = var.vpc-cidr
   enable_dns_support = true
   enable_dns_hostnames = true
-  tags = {
-    "Name" = "mediawiki"
-  }
 }
 
 resource "aws_internet_gateway" "mw_igw" {
@@ -36,7 +33,7 @@ resource "aws_route_table" "mw_rt" {
   }
 }
 
-resource "aws_route_table_association" "mw_rt_assoc" {
+resource "aws_route_table_association" "mw_rt_association" {
   route_table_id = aws_route_table.mw_rt.id
   subnet_id = aws_subnet.mw_subnet.id
 }
@@ -66,4 +63,3 @@ resource "aws_security_group" "mw_sg" {
     "Name" = "mediawiki"
   }
 }
-
