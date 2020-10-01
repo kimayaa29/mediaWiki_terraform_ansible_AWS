@@ -14,11 +14,18 @@ data "template_file" "user_data" {
 }
 
 resource "aws_autoscaling_group" "mw_asg" {
+  name = "${aws_launch_configuration.mw_launch_config.name}-asg"
   max_size = 3
   min_size = 1
+  health_check_type = "ELB"
+  load_balancers = [
+    aws_elb.mw_elb.id
+  ]
   launch_configuration = aws_launch_configuration.mw_launch_config.name
-  vpc_zone_identifier = [aws_subnet.mw_subnet.id]
-  name = "mediawiki_asg"
+  vpc_zone_identifier = [
+    aws_subnet.mw_subnet_public_1.id,
+    aws_subnet.mw_subnet_public_2.id
+  ]
   tag {
     key = "Name"
     propagate_at_launch = true
